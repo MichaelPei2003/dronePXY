@@ -98,7 +98,7 @@ while True:
             send_body_ned_velocity(0.8, 0, 0, vehicle)#(vx, vy, vz, vehicle)，单位m/s
             flag_aimed == 0
             print(0)
-
+        print(flag_aimed)
         if flag_aimed == 0:    
             ix, iy, last_error_x, last_error_y, flag_aimed = aim(bucket_x, bucket_y, ix, iy, last_error_x, last_error_y, vehicle)
     

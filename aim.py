@@ -1,5 +1,4 @@
 from send_body_ned_velocity import send_body_ned_velocity
-import math
 
 def aim(bucket_x, bucket_y, ix, iy, last_error_x, last_error_y, vehicle):
     flag = 0#flag aimed
@@ -30,7 +29,7 @@ def aim(bucket_x, bucket_y, ix, iy, last_error_x, last_error_y, vehicle):
     
     send_body_ned_velocity(vx, vy, vehicle)
     
-    if abs(error_x) < 1 and abs(error_y) < 1:
+    if abs(error_x) < 10 and abs(error_y) < 10:
         flag = 1
         
     return ix, iy, last_error_x, last_error_y, flag
