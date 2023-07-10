@@ -47,7 +47,7 @@ iy = 0
 last_error_x = 0
 last_error_y = 0
 flag_to_release = 0
-flag_aimed = 0
+flag_aimed = 1 #avoid getting 0 value
 
 #takeoff and leave takeoff area
 arm_and_takeoff(1, vehicle) #arm_and_takeoff(aTargetAltitude, vehicle)
@@ -96,6 +96,7 @@ while True:
             #如果没用检测到任何东西则直飞
             #如果一直未检测到目标飞行器不会自动停止！！！
             send_body_ned_velocity(0.8, 0, 0, vehicle)#(vx, vy, vz, vehicle)，单位m/s
+            flag_aimed == 0
             print(0)
 
         if flag_aimed == 0:    
