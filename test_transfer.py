@@ -6,8 +6,8 @@ import pigpio
 from dronekit import connect
 import sys
 sys.path.append("takeoff")
-from takeoff.arm_and_takeoff import arm_and_takeoff
-from takeoff.send_body_ned_velocity import send_body_ned_velocity
+from arm_and_takeoff import arm_and_takeoff
+from send_body_ned_velocity import send_body_ned_velocity
 from aim import aim
 
 vehicle = connect("192.168.130.182:14550", wait_ready=False) 
@@ -71,8 +71,7 @@ while True:
 
     # 发送图像数据
     client_socket.send(stringData)
-    
-    flag_to_release = int(stringData)
+
 
 #    显示图像
 #    cv2.imshow('frame', frame)
@@ -94,13 +93,11 @@ while True:
                 except:
                      pass
         else:
+            #如果没用检测到任何东西则直飞
+            #如果一直未检测到目标飞行器不会自动停止！！！
+            send_body_ned_velocity(0.8, 0, 0, vehicle)#(vx, vy, vz, vehicle)，单位m/s
             print(0)
 
-        #如果没用检测到任何东西则直飞
-        #如果一直未检测到目标飞行器不会自动停止！！！
-        if flag_to_release == 0:
-            send_body_ned_velocity(0.8, 0, 0, vehicle)#(vx, vy, vz, vehicle)，单位m/s
-        
         if flag_aimed == 0:    
             ix, iy, last_error_x, last_error_y, flag_aimed = aim(bucket_x, bucket_y, ix, iy, last_error_x, last_error_y, vehicle)
     
